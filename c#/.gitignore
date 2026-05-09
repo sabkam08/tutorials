@@ -1,0 +1,10 @@
+# C# / .NET build outputs
+**/bin/
+**/obj/
+.vs/
+
+# Visual Studio / Rider user files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
