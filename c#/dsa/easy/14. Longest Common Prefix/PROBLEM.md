@@ -4,7 +4,7 @@
 
 ## Description
 
-Write a function to find the longest common prefix string among an array of strings.
+Write a function that finds the longest common prefix string among an array of strings.
 
 If there is no common prefix, return an empty string `""`.
 
@@ -16,13 +16,17 @@ If there is no common prefix, return an empty string `""`.
 
 **Output:** `"fl"`
 
+**Explanation:**
+The longest prefix shared by all strings is `fl`.
+
 ### Example 2
 
 **Input:** `strs = ["dog", "racecar", "car"]`
 
 **Output:** `""`
 
-**Explanation:** There is no common prefix among the input strings.
+**Explanation:**
+There is no common prefix among the input strings.
 
 ## Constraints
 
