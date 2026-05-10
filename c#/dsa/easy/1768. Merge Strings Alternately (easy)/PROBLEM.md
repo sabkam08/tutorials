@@ -1,11 +1,12 @@
 # 1768. Merge Strings Alternately
 
-**Solved**  
 **Easy**
 
 ## Description
 
-You are given two strings `word1` and `word2`. Merge the strings by adding letters in alternating order, starting with `word1`. If one string is longer than the other, append the remaining letters onto the end of the merged string.
+You are given two strings `word1` and `word2`. Merge the strings by adding letters in alternating order, starting with `word1`.
+
+If one string is longer than the other, append the remaining letters onto the end of the merged string.
 
 Return the merged string.
 
@@ -16,7 +17,7 @@ Return the merged string.
 **Input:** `word1 = "abc"`, `word2 = "pqr"`  
 **Output:** `"apbqcr"`
 
-**Explanation:**  
+**Explanation:**
 The merged string is built as follows:
 
 ```text
@@ -30,7 +31,7 @@ merged:  a p b q c r
 **Input:** `word1 = "ab"`, `word2 = "pqrs"`  
 **Output:** `"apbqrs"`
 
-**Explanation:**  
+**Explanation:**
 Because `word2` is longer, `"rs"` is appended to the end.
 
 ```text
@@ -44,7 +45,7 @@ merged:  a p b q r s
 **Input:** `word1 = "abcd"`, `word2 = "pq"`  
 **Output:** `"apbqcd"`
 
-**Explanation:**  
+**Explanation:**
 Because `word1` is longer, `"cd"` is appended to the end.
 
 ```text
