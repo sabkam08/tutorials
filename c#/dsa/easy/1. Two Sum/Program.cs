@@ -11,8 +11,8 @@ public static class Program
         //
         // This avoids a compile-time reference to Solution, which is useful
         // when Rider is still having trouble resolving the symbol in the editor.
-        var solutionType = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
+        var solutionType = System.Reflection.Assembly.GetExecutingAssembly()
+            .GetTypes()
             .First(type => type.Name == "Solution");
         var solution = Activator.CreateInstance(solutionType) ??
                        throw new InvalidOperationException("Could not create Solution instance.");
