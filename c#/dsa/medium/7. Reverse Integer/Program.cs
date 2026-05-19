@@ -1,16 +1,32 @@
-using ReverseInteger;
-
-namespace ReverseInteger;
+#pragma warning disable
 
 public static class Program
 {
-    public static void Main()
+    public static void Main(string[] args)
     {
-        var solution = new Solution();
+        var solutionType = System.Reflection.Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .First(type => type.Name == "Solution");
+        var solution = Activator.CreateInstance(solutionType) ??
+                       throw new InvalidOperationException("Could not create Solution instance.");
 
-        Console.WriteLine(solution.Reverse(123));
-        Console.WriteLine(solution.Reverse(-123));
-        Console.WriteLine(solution.Reverse(120));
+        PrintResult(InvokeReverse(solution, 123));
+        PrintResult(InvokeReverse(solution, -123));
+        PrintResult(InvokeReverse(solution, 120));
+
+        static int InvokeReverse(object solution, int x)
+        {
+            var method = solution.GetType().GetMethod("Reverse")
+                         ?? throw new InvalidOperationException("Reverse method was not found.");
+
+            return (int)method.Invoke(solution, new object[] { x })!;
+        }
+
+        static void PrintResult(int result)
+        {
+            Console.WriteLine(result);
+        }
     }
 }
 
+#pragma warning restore

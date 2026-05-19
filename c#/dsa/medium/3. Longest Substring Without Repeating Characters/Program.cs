@@ -1,14 +1,32 @@
-using System;
+#pragma warning disable
 
 public static class Program
 {
-    public static void Main()
+    public static void Main(string[] args)
     {
-        var solution = new Solution();
+        var solutionType = System.Reflection.Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .First(type => type.Name == "Solution");
+        var solution = Activator.CreateInstance(solutionType) ??
+                       throw new InvalidOperationException("Could not create Solution instance.");
 
-        Console.WriteLine(solution.LengthOfLongestSubstring("abcabcbb"));
-        Console.WriteLine(solution.LengthOfLongestSubstring("bbbbb"));
-        Console.WriteLine(solution.LengthOfLongestSubstring("pwwkew"));
+        PrintResult(InvokeLengthOfLongestSubstring(solution, "abcabcbb"));
+        PrintResult(InvokeLengthOfLongestSubstring(solution, "bbbbb"));
+        PrintResult(InvokeLengthOfLongestSubstring(solution, "pwwkew"));
+
+        static int InvokeLengthOfLongestSubstring(object solution, string s)
+        {
+            var method = solution.GetType().GetMethod("LengthOfLongestSubstring")
+                         ?? throw new InvalidOperationException("LengthOfLongestSubstring method was not found.");
+
+            return (int)method.Invoke(solution, new object[] { s })!;
+        }
+
+        static void PrintResult(int result)
+        {
+            Console.WriteLine(result);
+        }
     }
 }
 
+#pragma warning restore

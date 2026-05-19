@@ -1,28 +1,34 @@
 #pragma warning disable
 
-using System.Reflection;
-
 public static class Program
 {
-	public static void Main()
+	public static void Main(string[] args)
 	{
-		Assembly assembly = typeof(Program).Assembly;
-		Type solutionType = assembly.GetType("Solution")
-			?? throw new InvalidOperationException("Solution type not found.");
+		// Search every loaded assembly for a type named "Solution".
+		// Create an instance of that type at runtime.
+		// Throw a helpful error if the instance cannot be created.
+		var solutionType = System.Reflection.Assembly.GetExecutingAssembly()
+			.GetTypes()
+			.First(type => type.Name == "Solution");
+		var solution = Activator.CreateInstance(solutionType) ??
+					   throw new InvalidOperationException("Could not create Solution instance.");
 
-		object solution = Activator.CreateInstance(solutionType)
-			?? throw new InvalidOperationException("Could not create Solution instance.");
+		PrintResult(InvokeMaximumJumps(solution, new[] { 1, 3, 6, 4, 1, 2 }, 2));
+		PrintResult(InvokeMaximumJumps(solution, new[] { 1, 3, 6, 4, 1, 2 }, 3));
+		PrintResult(InvokeMaximumJumps(solution, new[] { 1, 3, 6, 4, 1, 2 }, 0));
 
-		MethodInfo method = solutionType.GetMethod("MaximumJumps")
-			?? throw new InvalidOperationException("MaximumJumps method not found.");
+		static int InvokeMaximumJumps(object solution, int[] nums, int target)
+		{
+			var method = solution.GetType().GetMethod("MaximumJumps")
+					     ?? throw new InvalidOperationException("MaximumJumps method was not found.");
 
-		int first = (int)method.Invoke(solution, new object[] { new[] { 1, 3, 6, 4, 1, 2 }, 2 })!;
-		int second = (int)method.Invoke(solution, new object[] { new[] { 1, 3, 6, 4, 1, 2 }, 3 })!;
-		int third = (int)method.Invoke(solution, new object[] { new[] { 1, 3, 6, 4, 1, 2 }, 0 })!;
+			return (int)method.Invoke(solution, new object[] { nums, target })!;
+		}
 
-		Console.WriteLine(first);
-		Console.WriteLine(second);
-		Console.WriteLine(third);
+		static void PrintResult(int result)
+		{
+			Console.WriteLine(result);
+		}
 	}
 }
 
