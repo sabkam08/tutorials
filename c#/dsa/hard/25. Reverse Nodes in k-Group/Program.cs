@@ -45,4 +45,3 @@ public static class Program
         return "[" + string.Join(",", values) + "]";
     }
 }
-
