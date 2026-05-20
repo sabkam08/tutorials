@@ -16,11 +16,22 @@ public static class Program
 		MethodInfo method = solutionType.GetMethod("MyAtoi")
 			?? throw new InvalidOperationException("MyAtoi method not found.");
 
-		int first = (int)method.Invoke(solution, new object[] { "42" })!;
-		int second = (int)method.Invoke(solution, new object[] { "   -042" })!;
+		PrintResult(method, solution, "42");
+		PrintResult(method, solution, "   -042");
+		PrintResult(method, solution, "1337c0d3");
+		PrintResult(method, solution, "0-1");
+		PrintResult(method, solution, "words and 987");
+		PrintResult(method, solution, "91283472332");
+		PrintResult(method, solution, "-91283472332");
+		PrintResult(method, solution, "   +0 123");
+		PrintResult(method, solution, "+-12");
+		PrintResult(method, solution, "");
+	}
 
-		Console.WriteLine(first);
-		Console.WriteLine(second);
+	private static void PrintResult(MethodInfo method, object solution, string input)
+	{
+		int result = (int)method.Invoke(solution, new object[] { input })!;
+		Console.WriteLine(result);
 	}
 }
 
