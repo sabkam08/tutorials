@@ -194,6 +194,93 @@ Final result:
 LVIII
 ```
 
+### Example 3
+
+```text
+num = 9
+```
+
+This is one of the most important subtractive cases.
+
+The algorithm checks the mapping from largest to smallest until it reaches `9`:
+
+- `9 -> IX`
+
+Final result:
+
+```text
+IX
+```
+
+This example is useful because it shows why the mapping must include subtractive pairs directly.
+
+### Example 4
+
+```text
+num = 944
+```
+
+This number combines several Roman numeral rules at once:
+
+- `900 -> CM`
+- `40 -> XL`
+- `4 -> IV`
+
+So the final result is built as:
+
+```text
+CMXLIV
+```
+
+This is a very good practice example because it mixes:
+
+- a hundreds subtractive form,
+- a tens subtractive form,
+- and a ones subtractive form.
+
+### Example 5
+
+```text
+num = 3999
+```
+
+This is the largest value allowed by the problem.
+
+The conversion breaks down as:
+
+- `3000 -> MMM`
+- `900 -> CM`
+- `90 -> XC`
+- `9 -> IX`
+
+Final result:
+
+```text
+MMMCMXCIX
+```
+
+This example is especially helpful because it confirms that the algorithm handles repeated `M` values and all major subtractive combinations correctly.
+
+### Example 6
+
+```text
+num = 4
+```
+
+This is the smallest subtractive case in the entire problem.
+
+The algorithm goes directly to:
+
+- `4 -> IV`
+
+Final result:
+
+```text
+IV
+```
+
+If a solution outputs `IIII`, it is missing the Roman numeral rule for subtractive notation.
+
 ---
 
 ## 9. Why The Special Subtractive Forms Matter
