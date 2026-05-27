@@ -2,13 +2,6 @@
 
 **Hard**
 
-## Metadata
-
-**Topics:**
-
-**Premium Lock Icon:**
-
-**Companies:**
 
 ## Description
 
